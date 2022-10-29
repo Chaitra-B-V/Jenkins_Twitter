@@ -10,6 +10,7 @@ class TwitterTests(unittest.TestCase):
         mock_render_template.return_value = "Test"
         ret = home()
         self.assertEqual(ret, "Test")
+        print("Testcase 1")
 
     #testcase2 : to check if render template is called with home.html
     @patch("Flask_twitter_api.render_template")
@@ -17,6 +18,7 @@ class TwitterTests(unittest.TestCase):
         mock_render_template.return_value = "Test"
         home()
         mock_render_template.assert_called_with('home.html',posts=[])
+        print("Testcase 2")
 
     
     #testcase3 : to check if delete api is called with the correct tweet id and return to home page
@@ -37,6 +39,7 @@ class TwitterTests(unittest.TestCase):
         ret = deleteTweet()
         self.assertEqual(ret, "home-page")
         mock_oauth_delete.assert_called_with("https://api.twitter.com/2/tweets/1234")
+        print("Testcase 3")
 
     #testcase4 : to check if render template in deletetweet function is called with delete.html
     @patch("Flask_twitter_api.DeleteForm")
@@ -49,6 +52,7 @@ class TwitterTests(unittest.TestCase):
         ret = deleteTweet()
         self.assertEqual(ret, "delete-page")
         mock_render_template.assert_called_with('delete.html',title = "delete", form = mock_delete)
+        print("Testcase 4")
 
     #testcase5 : to check if render template in createtweet function is called with create.html
     @patch("Flask_twitter_api.CreateTweet")
@@ -61,6 +65,7 @@ class TwitterTests(unittest.TestCase):
         ret = createTweet()
         self.assertEqual(ret, "create-page")
         mock_render_template.assert_called_with('create.html',title = "create", form = mock_create)
+        print("Testcase 5")
 
     #testcase6 : to check if create api is called with the correct tweet content and return to home page
     @patch("Flask_twitter_api.CreateTweet")
@@ -80,6 +85,7 @@ class TwitterTests(unittest.TestCase):
         ret = createTweet()
         self.assertEqual(ret, "home-page")
         mock_oauth_post.assert_called_with("https://api.twitter.com/2/tweets",json={"text": "MockTweetData"})
+        print("Testcase 6")
 
 
 if __name__ == '__main__':
